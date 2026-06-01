@@ -293,7 +293,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         appbuilder.add_link(
             "Home",
             label=_("Home"),
-            href="/superset/welcome/",
+            # Custom (Centaur): prefix-less welcome URL.
+            href="/welcome/",
             cond=lambda: bool(current_app.config["LOGO_TARGET_PATH"]),
         )
 
