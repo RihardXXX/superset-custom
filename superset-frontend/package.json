@@ -236,7 +236,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.28.6",
-    "@babel/compat-data": "^7.28.4",
+    "@babel/compat-data": "^7.29.7",
     "@babel/core": "^7.29.0",
     "@babel/eslint-parser": "^7.28.6",
     "@babel/node": "^7.29.0",
