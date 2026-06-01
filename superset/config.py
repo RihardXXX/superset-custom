@@ -114,7 +114,10 @@ PACKAGE_JSON_FILE = str(files("superset") / "static/assets/package.json")
 #     "type": "image/png"
 #     "rel": "icon"
 # },
-FAVICONS = [{"href": "/static/assets/images/favicon.png"}]
+# Custom (Centaur): replaced the default Apache Superset favicon. The PNG lives in
+# superset-frontend/src/assets/images and is published to the static path below by
+# the webpack CopyPlugin during the frontend build.
+FAVICONS = [{"href": "/static/assets/images/custom-favicon.png"}]
 PDF_COMPRESSION_LEVEL: Literal["NONE", "FAST", "MEDIUM", "SLOW"] = "MEDIUM"
 
 
