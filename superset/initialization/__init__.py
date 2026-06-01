@@ -979,6 +979,16 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
 class SupersetIndexView(IndexView):
     @expose("/")
     def index(self) -> FlaskResponse:
+        # Custom (Centaur): use a configured dashboard as the landing page for
+        # ALL users (admins and non-admins) instead of /superset/welcome.
+        # `DEFAULT_LANDING_DASHBOARD` may be a dashboard id or slug. We redirect
+        # to the prefix-less /dashboard/<id>/ URL (served via the reverse proxy);
+        # the dashboard route enforces access control on its own, so this is a
+        # single, well-formed 302 with no redirect loop. When the value is not
+        # set we keep the upstream behaviour and go to the welcome page.
+        landing = current_app.config.get("DEFAULT_LANDING_DASHBOARD")
+        if landing:
+            return redirect(f"/dashboard/{landing}/")
         return redirect(url_for("Superset.welcome"))
 
     @expose("/lang/<string:locale>")

@@ -368,7 +368,16 @@ APP_ICON = "/static/assets/images/custom-logo.png"
 # Default value of None will take you to '/superset/welcome'
 # You can also specify a relative URL e.g. '/superset/welcome' or '/dashboards/list'
 # or you can specify a full URL e.g. 'https://foo.bar'
-LOGO_TARGET_PATH = None
+# Custom (Centaur): send the logo "home" to the index route ("/") so it honours
+# the configured landing dashboard (see DEFAULT_LANDING_DASHBOARD below).
+LOGO_TARGET_PATH = "/"
+
+# Custom (Centaur): use a specific dashboard as the landing page for ALL users
+# (not just Admin), replacing the default /superset/welcome page. The value is a
+# dashboard id or slug and is read from the environment so it can be set per
+# deployment without rebuilding the image. When unset, the welcome page is used.
+# The redirect happens in SupersetIndexView.index() (superset/initialization).
+DEFAULT_LANDING_DASHBOARD = os.environ.get("DEFAULT_LANDING_DASHBOARD") or None
 
 # Specify tooltip that should appear when hovering over the App Icon/Logo
 LOGO_TOOLTIP = ""
