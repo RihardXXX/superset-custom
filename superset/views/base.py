@@ -290,8 +290,11 @@ def menu_data(user: User) -> dict[str, Any]:
         },
         "environment_tag": get_environment_tag(),
         "navbar_right": {
-            # show the watermark if the default app icon has been overridden
-            "show_watermark": ("superset-logo-horiz" not in appbuilder.app_icon),
+            # Custom (Centaur): never render the "Powered by Apache Superset"
+            # watermark in the Settings → About menu. Upstream shows it whenever
+            # APP_ICON is overridden away from the bundled 'superset-logo-horiz'
+            # logo; since we ship a custom logo we force it off here.
+            "show_watermark": False,
             "bug_report_url": app.config["BUG_REPORT_URL"],
             "bug_report_icon": app.config["BUG_REPORT_ICON"],
             "bug_report_text": app.config["BUG_REPORT_TEXT"],
