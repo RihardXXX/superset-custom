@@ -232,6 +232,14 @@ RUN --mount=type=cache,target=${SUPERSET_HOME}/.cache/uv \
 # Install the superset package
 RUN --mount=type=cache,target=${SUPERSET_HOME}/.cache/uv \
     uv pip install -e .
+
+# Custom (Centaur): install the ClickHouse driver into the production image so
+# Superset can connect to ClickHouse out of the box via the `clickhousedb://`
+# SQLAlchemy dialect. Pin a concrete version in production for reproducible
+# builds; left unpinned here to track the latest stable, per the task spec.
+RUN --mount=type=cache,target=${SUPERSET_HOME}/.cache/uv \
+    uv pip install clickhouse-connect
+
 RUN python -m compileall /app/superset
 
 USER superset
