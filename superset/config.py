@@ -355,10 +355,14 @@ AUTH_RATE_LIMIT = "5 per second"
 # GLOBALS FOR APP Builder
 # ------------------------------
 # Uncomment to setup Your App name
-APP_NAME = "Superset"
+# Custom (Centaur): rebrand the application name (browser tab title + logo alt text).
+APP_NAME = "Centaur Analytics"
 
 # Specify the App icon
-APP_ICON = "/static/assets/images/superset-logo-horiz.png"
+# Custom (Centaur): replaced the default Apache Superset logo with the Centaur
+# Analytics logo. The PNG lives in superset-frontend/src/assets/images and is
+# published to the static path below by the webpack CopyPlugin.
+APP_ICON = "/static/assets/images/custom-logo.png"
 
 # Specify where clicking the logo would take the user'
 # Default value of None will take you to '/superset/welcome'
