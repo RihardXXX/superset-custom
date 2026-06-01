@@ -240,6 +240,12 @@ RUN --mount=type=cache,target=${SUPERSET_HOME}/.cache/uv \
 RUN --mount=type=cache,target=${SUPERSET_HOME}/.cache/uv \
     uv pip install clickhouse-connect
 
+# Custom (Centaur): install the PostgreSQL driver so this production image can use
+# a Postgres metadata database (the lean base image ships SQLite only). Required
+# by the production-emulation docker-compose stack.
+RUN --mount=type=cache,target=${SUPERSET_HOME}/.cache/uv \
+    uv pip install psycopg2-binary
+
 RUN python -m compileall /app/superset
 
 USER superset
