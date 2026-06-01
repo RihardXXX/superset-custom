@@ -939,7 +939,8 @@ THEME_DEFAULT: Theme = {
         # Brand
         # Application name for window titles
         "brandAppName": APP_NAME,
-        "brandLogoAlt": "Apache Superset",
+        # Custom (Centaur): logo alt text rebranded too.
+        "brandLogoAlt": APP_NAME,
         "brandLogoUrl": APP_ICON,
         "brandLogoMargin": "18px 0",
         "brandLogoHref": "/",
