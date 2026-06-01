@@ -72,7 +72,16 @@ services:
   superset-init:
     <<: *superset-common
     container_name: superset_init
-    command: ["/app/docker/docker-init.sh"]
+    # Run the stock init (migrations, admin, roles, examples) then publish the
+    # landing dashboard and share it with the Gamma role so non-admins can reach it.
+    command:
+      - bash
+      - -c
+      - "/app/docker/docker-init.sh && python /app/docker/init_landing.py"
+    volumes:
+      - ./docker/superset_config_docker.py:/app/pythonpath/superset_config.py:ro
+      - ./docker/init_landing.py:/app/docker/init_landing.py:ro
+      - superset_home:/app/superset_home
     environment:
       <<: *superset-env
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin}
