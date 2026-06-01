@@ -84,13 +84,17 @@ curl -sI http://localhost/ | grep -i location                     # /dashboard/w
 ```
 
 Стартовая страница и чистые URL работают и для обычного пользователя (роль
-`Gamma`): достаточно, чтобы дашборд был расшарен на роль или опубликован.
-Пример создания не-админа:
+`Gamma`). При инициализации (`superset-init` → `docker/init_landing.py`) лендинг-дашборд
+автоматически публикуется и расшаривается на роль `Gamma` (через `DASHBOARD_RBAC`),
+поэтому свежесозданный не-админ сразу попадает на полностью доступный дашборд.
+Проверить можно так:
 
 ```bash
+# создать не-админа
 docker compose exec superset superset fab create-user \
   --role Gamma --username viewer --password viewer \
   --firstname V --lastname Iewer --email viewer@centaur.local
+# войти под viewer/viewer на http://localhost — попадёте на /dashboard/world_health/ (200)
 ```
 
 ## 3. Что бы я ещё изменил для Production
